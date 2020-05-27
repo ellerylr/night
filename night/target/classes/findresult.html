@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <form action="AddResultServlet">
+    <input type="hidden" name="studentno" th:value=${list.get(0).student.studentno}>
+    <input type="hidden" name="studentname" th:value=${list.get(0).student.studentname}>
+    科目：<select name="subjectid">
+     <option value="5">Java高级</option>
+			<option value="6">JavaScript</option>
+			<option value="7">JavaEE</option>
+    </select>
+     成绩:<input size="4" name="score"> 
+     <input type="submit" value="添加">
+  </form>
+  <span>
+    <table border="1">
+      <tr>
+        <th>学生姓名</th>
+        <th>科目名称</th>
+        <th>成绩</th>
+      </tr>
+      <tr>
+        <td th:text=${list.get(0).student.studentno}></td>
+        <td th:text=${list.get(0).student.studentname}></td>
+      </tr>
+      <tr th:each="r : ${list}">
+        <td th:text="${r.student.studentname}"></td>
+        <td th:text="${r.subject.subjectname}"></td>
+        <td th:text=${r.score}></td>
+      </tr>
+    </table>
+    <table border="1">
+      <tr>
+        <th>查找历史</th>
+      </tr>
+      <tr th:each="c:${cnames}">
+        <td>
+          <a th:text=${c} th:href="'FindResultServlet?name='+${c}">无</a>
+        </td>
+      </tr>
+    </table>
+  </span>
+</body>
+</html>
